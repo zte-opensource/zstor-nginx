@@ -5,14 +5,14 @@
 # Source function library.
 [ -f /etc/rc.d/init.d/functions ] && . /etc/rc.d/init.d/functions
 
-if [ -f /etc/sysconfig/nginx ]; then
-    . /etc/sysconfig/nginx
+if [ -f /etc/sysconfig/zstor-nginx ]; then
+    . /etc/sysconfig/zstor-nginx
 fi
 
-prog=nginx
-nginx=/usr/sbin/nginx
-conffile=/etc/nginx/nginx.conf
-pidfile=`/usr/bin/systemctl show -p PIDFile nginx.service | sed 's/^PIDFile=//' | tr ' ' '\n'`
+prog=zstor-nginx
+nginx=/usr/sbin/zstor-nginx
+conffile=/etc/zstor-nginx/zstor-nginx.conf
+pidfile=`/usr/bin/systemctl show -p PIDFile zstor-nginx.service | sed 's/^PIDFile=//' | tr ' ' '\n'`
 SLEEPSEC=${SLEEPSEC:-1}
 UPGRADEWAITLOOPS=${UPGRADEWAITLOOPS:-5}
 
