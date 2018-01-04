@@ -35,9 +35,9 @@ fi
 
 nginx=${NGINX:-/usr/sbin/%PROVIDES%}
 prog=`/bin/basename $nginx`
-conffile=${CONFFILE:-/etc/nginx/nginx.conf}
+conffile=${CONFFILE:-/etc/zstor-nginx/zstor-nginx.conf}
 lockfile=${LOCKFILE:-/var/lock/subsys/%PROVIDES%}
-pidfile=${PIDFILE:-/var/run/nginx.pid}
+pidfile=${PIDFILE:-/var/run/zstor-nginx.pid}
 SLEEPSEC=${SLEEPSEC:-1}
 UPGRADEWAITLOOPS=${UPGRADEWAITLOOPS:-5}
 CHECKSLEEP=${CHECKSLEEP:-3}
@@ -114,7 +114,7 @@ rh_status() {
 check_reload() {
     templog=`/bin/mktemp --tmpdir nginx-check-reload-XXXXXX.log`
     trap '/bin/rm -f $templog' 0
-    /usr/bin/tail --pid=$$ -n 0 --follow=name /var/log/nginx/error.log > $templog &
+    /usr/bin/tail --pid=$$ -n 0 --follow=name /var/log/zstor-nginx/error.log > $templog &
     /bin/sleep 1
     /bin/echo -n $"Sending reload signal to $prog: "
     killproc -p ${pidfile} ${prog} -HUP

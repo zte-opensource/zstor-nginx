@@ -1,14 +1,14 @@
 [Unit]
-Description=nginx - high performance web server
+Description=zstor-nginx - high performance web server
 Documentation=http://nginx.org/en/docs/
 After=network-online.target remote-fs.target nss-lookup.target
 Wants=network-online.target
 
 [Service]
 Type=forking
-PIDFile=/var/run/nginx.pid
-ExecStartPre=/usr/sbin/nginx-debug -t -c /etc/nginx/nginx.conf
-ExecStart=/usr/sbin/nginx-debug -c /etc/nginx/nginx.conf
+PIDFile=/var/run/zstor-nginx.pid
+ExecStartPre=/usr/sbin/zstor-nginx -t -c /etc/zstor-nginx/zstor-nginx.conf
+ExecStart=/usr/sbin/zstor-nginx -c /etc/zstor-nginx/zstor-nginx.conf
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 
