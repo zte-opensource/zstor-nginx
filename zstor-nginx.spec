@@ -47,8 +47,8 @@ BuildRequires: systemd
 
 # end of distribution specific definitions
 
-%define main_version 1.12.2
-%define main_release 1%{?dist}
+%define main_version @VERSION@
+%define main_release @RELEASE@%{?dist}
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
