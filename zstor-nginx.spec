@@ -70,7 +70,7 @@ Source1: logrotate
 Source2: zstor-nginx.init.in
 Source3: zstor-nginx.sysconf
 Source4: zstor-nginx.conf
-Source5: zstor-nginx.vh.default.conf
+#Source5: zstor-nginx.vh.default.conf
 Source7: zstor-nginx-debug.sysconf
 Source8: zstor-nginx.service
 Source9: zstor-nginx.upgrade.sh
@@ -142,8 +142,8 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/zstor-nginx && \
 %{__rm} $RPM_BUILD_ROOT%{_sysconfdir}/zstor-nginx/zstor-nginx.conf
 %{__install} -m 644 -p %{SOURCE4} \
     $RPM_BUILD_ROOT%{_sysconfdir}/zstor-nginx/zstor-nginx.conf
-%{__install} -m 644 -p %{SOURCE5} \
-    $RPM_BUILD_ROOT%{_sysconfdir}/zstor-nginx/conf.d/default.conf
+#%{__install} -m 644 -p %{SOURCE5} \
+#    $RPM_BUILD_ROOT%{_sysconfdir}/zstor-nginx/conf.d/default.conf
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
 %{__install} -m 644 -p %{SOURCE3} \
@@ -200,7 +200,7 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/zstor-nginx && \
 %{_sysconfdir}/zstor-nginx/modules
 
 %config(noreplace) %{_sysconfdir}/zstor-nginx/zstor-nginx.conf
-%config(noreplace) %{_sysconfdir}/zstor-nginx/conf.d/default.conf
+#%config(noreplace) %{_sysconfdir}/zstor-nginx/conf.d/default.conf
 %config(noreplace) %{_sysconfdir}/zstor-nginx/mime.types
 %config(noreplace) %{_sysconfdir}/zstor-nginx/fastcgi_params
 %config(noreplace) %{_sysconfdir}/zstor-nginx/scgi_params
