@@ -12,8 +12,8 @@
 Requires(pre): shadow-utils
 Requires: initscripts >= 8.36
 Requires(post): chkconfig
-Requires: openssl >= 1.0.1
-BuildRequires: openssl-devel >= 1.0.1
+#Requires: openssl >= 1.0.1
+#BuildRequires: openssl-devel >= 1.0.1
 %endif
 
 %if 0%{?rhel} == 7
@@ -26,12 +26,12 @@ Requires: systemd
 BuildRequires: systemd
 %define os_minor %(lsb_release -rs | cut -d '.' -f 2)
 %if %{os_minor} >= 4
-Requires: openssl >= 1.0.2
-BuildRequires: openssl-devel >= 1.0.2
+#Requires: openssl >= 1.0.2
+#BuildRequires: openssl-devel >= 1.0.2
 %define dist .el7
 %else
-Requires: openssl >= 1.0.1
-BuildRequires: openssl-devel >= 1.0.1
+#Requires: openssl >= 1.0.1
+#BuildRequires: openssl-devel >= 1.0.1
 %define dist .el7
 %endif
 %endif
@@ -41,7 +41,7 @@ BuildRequires: openssl-devel >= 1.0.1
 %define nginx_loggroup trusted
 Requires(pre): shadow
 Requires: systemd
-BuildRequires: libopenssl-devel
+#BuildRequires: libopenssl-devel
 BuildRequires: systemd
 %endif
 
@@ -107,13 +107,17 @@ sed -e 's|%%DEFAULTSTART%%||g' -e 's|%%DEFAULTSTOP%%|0 1 2 3 4 5 6|g' \
 ./configure %{BASE_CONFIGURE_ARGS} \
     --with-cc-opt="%{WITH_CC_OPT}" \
     --with-ld-opt="%{WITH_LD_OPT}" \
-    --with-debug
+    --with-debug \
+    --with-openssl=./openssl-1.0.2n \
+    --with-openssl-opt=-fPIC
 make %{?_smp_mflags}
 %{__mv} %{bdir}/objs/nginx \
     %{bdir}/objs/zstor-nginx-debug
 ./configure %{BASE_CONFIGURE_ARGS} \
     --with-cc-opt="%{WITH_CC_OPT}" \
-    --with-ld-opt="%{WITH_LD_OPT}"
+    --with-ld-opt="%{WITH_LD_OPT}" \
+    --with-openssl=./openssl-1.0.2n \
+    --with-openssl-opt=-fPIC
 make %{?_smp_mflags}
 
 %install
